@@ -27,8 +27,6 @@ def setValue(name_instruction, first_argument, result):
 def executeInstruction(splitedInstruction, program_counter):
 
 	name_instruction = splitedInstruction[0]
-	print("Nem inst")
-	print(name_instruction)	
 	if name_instruction == 'add' or name_instruction == 'mul' or name_instruction == 'sub' or name_instruction == 'div':
 		first_argument = splitedInstruction[1]
 		second_argument = splitedInstruction[2]

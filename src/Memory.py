@@ -1,6 +1,7 @@
-import re
+import re, Cache
 memory_dictionary = {}
 payload = 0
+amount_associative = 4
 
 def initMemory(amount_memory):
 	memory = open("../data_handler/memory.txt", "w+")
@@ -12,26 +13,39 @@ def setPayload(amount):
 	global payload 
 	payload += amount
 
+
 def getKeyPayload(key):
-	print(key)
 	local = int(re.search(r'\d+', key).group())
 	key = "M["+str(int(local + payload))+"]"
-	print(key)
 	return key
 
 def store(key, value):
-	print("store")
+
 	key = getKeyPayload(key)
+	Cache.update(key, value)
 	if memory_dictionary[key] == None:
 		raise Exception('Location in memory is not defined: {}'.format(key))
 
 	memory_dictionary[key] = value
 
-def load(key):
-	print("load")
-	key = getKeyPayload(key)
+def load(local):
+	key = getKeyPayload(local)
+
+	if Cache.load(key) != None:
+		return Cache.load(key)
+
 	if memory_dictionary[key] == None:
-		raise Exception('Location in memory is not defined: {}'.format(key))
+		raise Exception('Location in memory is not defined: {}'.format(key)) 
+
+	local_cache = int(re.search(r'\d+', local).group())
+	for x in xrange(0 ,amount_associative):
+		key_cache = getKeyPayload('M['+str(local_cache)+']')
+		if memory_dictionary[key_cache] != None:
+			Cache.store(key_cache, memory_dictionary[key_cache])
+			local_cache = local_cache + 1
+		else:
+			break
+
 	return memory_dictionary[key]
 
 def loadInstruction(key):

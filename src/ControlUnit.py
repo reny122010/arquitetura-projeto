@@ -1,4 +1,4 @@
-import Memory, Decoder, Register
+import Memory, Decoder, Register, Cache
 	
 programCounter = 0
 goToMap = {}
@@ -21,10 +21,12 @@ def executeProgram(memory_dictionary):
 		if Decoder.decoderInstruction(Memory.loadInstruction('M['+str(programCounter)+']'), programCounter):
 			Memory.flush()
 			Register.flush()
+			Cache.flush()
 			return
 		if debug:
 			Memory.flush()
 			Register.flush()
+			Cache.flush()
 		incrementProgramCounter()
 
 def initControlUnit(file_path):
