@@ -1,0 +1,4 @@
+add M[0] 0 4
+loop:
+sub M[0] M[0] 1
+greater M[0] 1 loop
