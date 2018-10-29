@@ -64,7 +64,6 @@ def executeInstruction(splitedInstruction, program_counter):
 		return False
 
 	else:
-		print('Program was finished!')
 		return True
 
 

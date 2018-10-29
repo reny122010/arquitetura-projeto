@@ -1,7 +1,7 @@
 import re, Cache
 memory_dictionary = {}
 payload = 0
-amount_associative = 4
+amount_associative = 1
 
 def initMemory(amount_memory):
 	memory = open("../data_handler/memory.txt", "w+")

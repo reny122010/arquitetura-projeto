@@ -22,6 +22,11 @@ def executeProgram(memory_dictionary):
 			Memory.flush()
 			Register.flush()
 			Cache.flush()
+			print('Cache Miss')
+			print(Cache.cache_miss)
+			print('Cache Hit')
+			print(Cache.cache_hit)
+			print('Program was finished!')
 			return
 		if debug:
 			Memory.flush()
